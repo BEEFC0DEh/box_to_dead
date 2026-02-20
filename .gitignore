@@ -1,14 +1,51 @@
-# C++ objects and libs
-*.slo
-*.lo
-*.o
+# This file is used to ignore files which are generated
+# ----------------------------------------------------------------------------
+
+*~
+*.autosave
 *.a
 *.la
 *.lai
+*.core
+*.moc
+*.o
+*.obj
+*.orig
+*.rej
 *.so
 *.so.*
-*.dll
-*.dylib
+*_pch.h.cpp
+*_resource.rc
+.#*
+*.*#
+core
+!core/
+tags
+.DS_Store
+.directory
+*.debug
+Makefile*
+*.app
+Thumbs.db
+*.res
+*.rc
+
+# C++ objects and libs
+*.slo
+*.lo
+
+# qtcreator generated files
+*.pro.user*
+*.qbs.user*
+CMakeLists.txt.user*
+
+# Directories with generated files
+.moc/
+.obj/
+.pch/
+.rcc/
+.uic/
+/build*/
 
 # Qt-es
 object_script.*.Release
@@ -27,28 +64,20 @@ qrc_*.cpp
 ui_*.h
 *.qmlc
 *.jsc
-Makefile*
 *build-*
 *.qm
 *.prl
+*_qmlcache.qrc
 
 # Qt unit tests
 target_wrapper.*
 
-# QtCreator
-*.autosave
-
 # QtCreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
-
-# QtCreator CMake
-CMakeLists.txt.user*
 
 # QtCreator 4.8< compilation database
 compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
-
-*_qmlcache.qrc
