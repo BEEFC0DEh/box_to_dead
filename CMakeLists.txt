@@ -17,6 +17,7 @@ qt_add_qml_module(appbox_to_dead
     QML_FILES
         Main.qml
         PolygonEditor.qml
+        CircleEditor.qml
 )
 
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)

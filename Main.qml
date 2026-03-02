@@ -36,6 +36,13 @@ Window {
 
     World { id: physicsWorld }
 
+    CircleEditor {
+        anchors.fill: parent
+        z: -1
+
+        world: physicsWorld
+    }
+
     PolygonEditor {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
