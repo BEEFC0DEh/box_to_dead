@@ -24,6 +24,7 @@ Rectangle {
 
                      property alias bodyType: body.bodyType
                      property bool created
+                     property bool selected: root.selected === this
 
             x: centerX - circleRadius
             y: centerY - circleRadius
@@ -31,14 +32,16 @@ Rectangle {
             width: 2 * radius
             height: width
 
-            color: root.selected === this ? "coral" : "pink"
+            color: selected ? "coral" : "pink"
             border.color: "red"
             border.width: 2
+
+            onCreatedChanged: radiusMousearea.updatePosition()
 
             Body {
                 id: body
 
-                active: created && !dragHandle.drag.active
+                active: created && !dragHandle.drag.active && !selected
                 bodyType: Body.Dynamic
                 target: circle
                 fixtures: Circle {
@@ -87,6 +90,53 @@ Rectangle {
                     anchors.fill: parent
                     cursorShape: Qt.DragMoveCursor
                     drag.target: circle
+                }
+            }
+
+            Item {
+                anchors.fill: parent
+                rotation: -parent.rotation
+                visible: circle.selected
+
+                Rectangle {
+                    id: radiusHandle
+
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: parent.width - (width * 0.5)
+
+                    width: 20
+                    height: width
+                    radius: width * 0.5
+                    color: "#88888888"
+                    border.width: 1
+                    border.color: "lightblue"
+                }
+
+                MouseArea {
+                    id: radiusMousearea
+
+                    property real prevX
+
+                    function updatePosition() {
+                        x = radiusHandle.x
+                        y = radiusHandle.y
+                    }
+
+                    width: radiusHandle.width
+                    height: radiusHandle.height
+                    cursorShape: Qt.DragMoveCursor
+
+                    onPressed: (mouse) => {
+                                   prevX = mouse.x
+                               }
+
+                    onPositionChanged: (mouse) => {
+                                           let deltaX = mouse.x - prevX
+                                           circle.radius += deltaX * 0.5
+                                           prevX = mouse.x
+                                       }
+
+                    onReleased: updatePosition()
                 }
             }
 
